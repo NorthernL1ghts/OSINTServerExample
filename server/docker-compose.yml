@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: socket_io_server
+    restart: always
+    ports:
+      - "8080:8080"  # Forward traffic from port 8080 on the host to port 8080 in the container
+    volumes:
+      - ./logs:/app/logs  # Mount the logs directory inside the container
+    command: npm start

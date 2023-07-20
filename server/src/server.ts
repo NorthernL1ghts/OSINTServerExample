@@ -8,7 +8,7 @@ const app = express();
 const httpServer = createServer(app);
 const io = new SocketIOServer(httpServer);
 
-const port = 3000;
+const port = 8080;
 const logFolderPath = path.join(__dirname, 'logs');
 const logFilePath = path.join(logFolderPath, 'received_messages.log');
 
