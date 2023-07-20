@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { createServer, Server } from 'http';
+import { createServer } from 'http';
 import { Server as SocketIOServer, Socket } from 'socket.io';
 import path from 'path';
 import fs from 'fs';
@@ -20,7 +20,7 @@ app.get('/', (req: Request, res: Response) => {
 // Serve static files from the 'client' directory:
 app.use('/client', express.static(path.join(__dirname, 'client')));
 
-// Handle WebSocket connections
+// Handle WebSocket connections:
 io.on('connection', (socket: Socket) => {
   console.log('A user connected');
 
