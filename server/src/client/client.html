@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WebSocket Client</title>
+  <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+  <!-- Heading and instruction message -->
+  <h1>Send a Message to the Server</h1>
+  <p>Type your message in the input field below and click the "Send" button to send it to the server.</p>
+
+  <!-- Input field and send button -->
+  <input id="messageInput" type="text" placeholder="Enter message" />
+  <button id="sendButton">Send</button>
+
+  <!-- Alert message -->
+  <div id="messageSentAlert">Message sent!</div>
+
+  <!-- Socket.IO library -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+
+    const messageInput = document.getElementById('messageInput');
+    const sendButton = document.getElementById('sendButton');
+    const messageSentAlert = document.getElementById('messageSentAlert');
+
+    // Event listener for the send button:
+    sendButton.addEventListener('click', () => {
+      const message = messageInput.value;
+      socket.emit('message', message); // Send the message to the server.
+      messageInput.value = ''; // Clear the input field.
+      messageSentAlert.style.display = 'block'; // Show the alert message.
+      setTimeout(() => {
+        messageSentAlert.style.display = 'none'; // Hide the alert message after 2 seconds.
+      }, 2000);
+    });
+
+    socket.on('message', (data) => {
+      console.log('Received message:', data);
+    });
+  </script>
+</body>
+</html>
